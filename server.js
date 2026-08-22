@@ -14,6 +14,17 @@ const users = [{
 
 
 http.createServer((request, response) => {
-    response.writeHead(200, {"content-type": "application/json"});
-    response.end(JSON.stringify(users));
+    if (request.url !== '/users'){
+        response.writeHead(404, {"content-type": "application/json"});
+        response.end(JSON.stringify({
+            error: 404,
+            message: 'Recurso não enocntrado.'
+        }));
+        return;
+    }
+    else {
+        response.writeHead(200, {"content-type": "application/json"});
+        response.end(JSON.stringify(users));
+    }
+
 }).listen(3000);
