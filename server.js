@@ -12,8 +12,9 @@ const users = [{
 }];
 
 
-
 http.createServer((request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+
     if (request.url !== '/users'){
         response.writeHead(404, {"content-type": "application/json"});
         response.end(JSON.stringify({
